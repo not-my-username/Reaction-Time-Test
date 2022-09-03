@@ -66,11 +66,17 @@ function buttonClick() {
 }
 
 $(document).ready(function() {
+    $("#mainButton").on("click", function() {
+        buttonClick()
+    })
+
     $('#timesToRun').on('input', function(e) {
         testsToRun = parseInt($('#timesToRun').val()) || 5
     });
-    $("body").on("click", function() {
-        console.log("Screen Click");
-        buttonClick()
+    $("body").on("click", function(e) {
+        var container = $("#content");
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            buttonClick()
+        }
     });
 });
